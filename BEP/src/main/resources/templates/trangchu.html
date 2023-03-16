@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Trang chủ</title>
+	<meta name="author" content="Surjith S M" />
+
+	<!-- SEO -->
+	<meta name="description"
+		content="Tomato is a Responsive HTML5 Template for Restaurants and food related services." />
+	<meta name="keywords" content="tomato, responsive, html5, restaurant, template, food, reservation" />
+
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="/img/favicon.ico" /> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Responsive Tag -->
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- CSS Files -->
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="/css/plugin.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+<!-- Preloder-->
+	<div class="preloder animated">
+		<div class="scoket">
+			<img src="img/preloader.svg"/>
+		</div>
+	</div>
+	
+	<div class="body">
+		<div class="main-wrapper">
+			<!-- Navigation-->
+			<nav class="navbar navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">
+							<h1>TheGioiBep</h1>
+						</a>
+						<div class="container">
+							<input type="text" id="myInput" placeholder="Nhập tên sản phẩm ..."
+								title="Nhập tên sản phẩm bạn muốn tìm kiếm">
+						</div>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right" style="margin-top: -60px;">
+							<li>
+								<a href="#" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Trang Chủ</a>
+							</li>
+							<!--  <li>
+								<a href="/gioithieu" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Giới Thiệu</a>
+							</li>-->
+							<li>
+								<a href="/sanpham" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Sản Phẩm</a>
+							</li>
+
+
+							<li class="dropdown">
+								<a href="/xemgiohang" class="css-pointer dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false"><i
+										class="fa fa-shopping-cart fsc pull-left"></i>
+									<div th:if="${session.login == null}" <span class="cart-number">0</span>
+                  </div>
+                  <div th:if="${session.login != null}" <span class="cart-number" th:text="${session.sogh}"></span>
+                  </div>
+									<span class="caret"></span>
+									<div class="cart-content dropdown-menu">
+										<div class="cart-title">
+											<h4>Giỏ hàng</h4>
+										</div>
+										<div class="cart-items" th:each="listgh : ${session.listgh}">
+											<div class="cart-item clearfix">
+												<div class="cart-item-image">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}"><img
+															style="width: 48px;"
+															th:src="@{${'/image/' + listgh.URLHinh 	}}"
+															alt="Breakfast with coffee" /></a>
+												</div>
+												<div class="cart-item-desc">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}">
+														<span th:utext="${listgh.TenSP}"></span>
+													</a>
+													<span class="cart-item-price"
+														th:inline="text">[[${#numbers.formatDecimal(listgh.Gia, 0,
+														'COMMA', 0, 'POINT')}]] VND</span>
+													<span> x </span>
+													<span class="cart-item-quantity" th:utext="${listgh.SL}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="cart-action clearfix" th:if="${session.sogh!=0}">
+											<div class="clearfix" th:if="${session.login!=null}">
+												<span class="pull-left "
+													style="font-size: 23px;">[[${#numbers.formatDecimal(session.tongtien,
+													0, 'COMMA', 0, 'POINT')}]] VND</span>
+												<a class="btn btn-default pull-right" href="/xemgiohang">Xem giỏ
+													hàng</a>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="dropdown" th:if="${session.login == null}">
+								<a href="/dangnhap" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Đăng nhập</a>
+							</li>
+							<li class="dropdown" th:if="${session.login}">
+								<a href="#" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false"><i class="fa fa-user fsc pull-left"></i><span
+										style="color:#f9c56a" th:text="${session.login.Username}"></span> <span
+										class="caret"></span></a>
+								<div class="cart-content dropdown-menu">
+
+									<div class="cart-items">
+										<div class="cart-item clearfix">
+											<div class="cart-item-desc">
+												<a href="/thongtinkhachhang">Tài khoản của tôi</a>
+											</div>
+										</div>
+									</div>
+									<div class="cart-items">
+										<div class="cart-item clearfix">
+											<div class="cart-item-desc">
+												<a href="/lichsumuahang">Lịch sử mua hàng</a>
+											</div>
+										</div>
+									</div>
+									<div class="cart-action">
+										<div class="cart-item clearfix">
+											<div class="cart-item-desc">
+												<a href="/dangxuat">Đăng xuất</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--/.navbar-collapse -->
+					<div class="container">
+						<ul id="myUL">
+							<li th:each="listsp : ${listsp}">
+								<a th:href="@{/sanpham/{IDSP}(IDSP=${listsp.IDSP})  }">
+									<img th:src="@{${'/image/' + listsp.URLHinh 	}}" style="width: 50px;">
+									<span th:utext="${listsp.TenSP}"></span>
+									<div class="product-price-search" th:if="*{listsp.GiaKM}!=0">
+										<strike><span
+												th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b>
+												VND</b></strike> <br>
+										<span
+											th:utext="${#numbers.formatDecimal(listsp.GiaKM, 0, 'COMMA',0,'POINT')}"></span><b>
+											VND</b>
+									</div>
+									<div class="product-price-search" th:if="${listsp.GiaKM} == 0">
+										<span
+											th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b>
+											VND</b><br>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Home page-->
+			<section class="home">
+				<div class="tittle-block">
+					<!--  --><div class="logo">
+						<a href="#">
+							
+						</a>
+					</div>-->
+					<h1>Website bán thiết bị bếp.<br> Nhóm 2</h1>
+				</div>
+				<div class="scroll-down">
+					<a href="#about">
+						<img src="img/arrow-down.png" alt="down-arrow" />
+					</a>
+				</div>
+			</section>
+
+		 	<!-- About page-->
+		<!--	<section class="about" id="about">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="page-header wow fadeInDown">
+								<h1>
+									THIẾT BỊ BẾP<small>Một chút về chúng tôi, lịch sử hình thành và cách chúng
+										tôi bắt đầu.</small>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="row wow ">
+						<div class="col-md-4">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-xs-12 hidden-sm ">
+										<div class="">
+											<img src="img/thumb1.png" class="img-responsive" alt="logo" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6  hidden-xs">
+										<img src="img/thumb2.png" class="img-responsive" alt="logo" />
+									</div>
+									<div class="col-sm-6  hidden-xs">
+										<img src="img/thumb3.png" class="img-responsive" alt="logo" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<p>
+								Thời kì mà thiết bị nhà bếp bắt đầu được hình thành là vào đầu
+								thế kỷ 19, khu bếp là nơi đầu tiên được đưa vào ứng dụng những
+								công nghệ mới, ví dụ như bếp lò tiết kiệm năng lượng của
+								Benjamin Thomson. Kiểu lò này được làm bằng sắt và đóng kín
+								hoàn toàn, có thể sử dụng một ngọn lửa để đun nóng nhiều nồi
+								và được thiết kế cho nhưng khu bếp rộng.
+							</p>
+							<br />
+							<p>
+								Trong thời đại công nghiệp, đồ ăn nhanh trở nên phổ biến và nó
+								cũng thay đổi cách hoạt động của khu bếp trong các nhà hàng,
+								quán ăn. Các nhà hàng hiện nay thường có xu hướng chuẩn bị sẵn
+								các món ăn và chỉ việc hâm nóng lại khi có khách gọi món, hoặc
+								phòng bếp tại các nhà hàng hiện nay chỉ dùng để làm các món
+								nướng, hamburger hay bít tết.
+							</p>
+							<img src="img/signature.png" alt="signature" />
+						</div>
+					</div>
+				</div>
+			</section>-->
+			<!-- Today's special page-->
+			<section class="special">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="page-header wow fadeInDown">
+								<h1 class="white">
+									Sản Phẩm Hôm Nay<small>Những Sản Phẩm Bán Chạy Nhất</small>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="row wow fadeInUp">
+						<div class="col-md-offset-1 col-md-10">
+							<div class="flexslider special-slider">
+								<ul class="slides">
+									<li>
+										<div class="slider-img">
+											<img src="img/thumb4.png" alt="" />
+										</div>
+										<div class="slider-content">
+											<div class="page-header">
+												<h1>
+													Máy rửa chén<small>Nếu bạn là một người khá bận rộn, thì đây có lẽ
+														là sản phẩm giúp bạn rút ngắn thời gian nhưng vẫn
+														chu toàn mọi công việc một cách nhanh
+														chóng.</small>
+												</h1>
+											</div>
+											<p>
+												Rất đơn giản để sử dụng nó, ta chỉ cần đổ thức ăn thừa
+												đi và bỏ chén bát vào giá của máy, tiếp đến là kiểm
+												tra lượng xà phòng chuyên dụng đã đủ chưa, sau đó chỉ
+												cần chọn chu trình rửa phù hợp mà bạn cần. Vậy là xong
+												rồi đó.
+											</p>
+											<a class="btn btn-default" href="/sanpham/18" role="button">Xem Chi Tiết</a>
+
+										</div>
+									</li>
+									<li>
+										<div class="slider-img">
+											<img src="/image/lonuong1.jpg" alt="" />
+										</div>
+										<div class="slider-content">
+											<div class="page-header">
+												<h1>
+													Lò nướng Bosch HB<small>Lò nướng Bosch HBA43S360E có chức năng nướng
+														đa dạng với mọi thực phẩm, làm ra nhiều món ăn thơm ngon cho gia
+														đình thưởng thức.</small>
+												</h1>
+											</div>
+											<p>
+												Được kiểm duyệt gắt gao, đặt tiêu chuẩn châu Âu lò nướng Bosch
+												HBA43S360E luôn nằm trong danh sách sản phẩm chất lượng nhất hiện nay.
+												Khoang lò được tráng lớp men Titan màu xám tự làm sạch dễ dàng có khả
+												năng chống trầy xước chịu được ở nhiệt độ cao.
+												Màu đen phủ kín sang trọng, sạch sẽ thích hợp với căn bếp hiện đại.
+											</p>
+											<a class="btn btn-default" href="/sanpham/23" role="button">Xem Chi Tiết</a>
+
+										</div>
+									</li>
+									<li>
+										<div class="slider-img">
+											<img src="/image/bepdien2.png" alt="" />
+										</div>
+										<div class="slider-content">
+											<div class="page-header">
+												<h1>
+													BẾP ĐIỆN BOSCH 7E<small>BẾP ĐIỆN BOSCH 7E là phiên bản bếp từ có
+														chức năng cũng như vẻ ngoài gần như giống hệt người anh em được
+														ưa chuộng PUC631BB2E, tuy nhiên, bếp có công suất lớn hơn rất
+														nhiều cho hiệu năng mạnh mẽ.</small>
+												</h1>
+											</div>
+											<p>
+												Nhắc đến Bosch là nhắc đến một ông lớn trong ngành thiết bị đồ gia dụng.
+												Đặc biệt, các sản phẩm thiết bị nhà bếp như bếp từ, bếp điện, lò nướng,
+												máy rửa bát,...của hãng cực kì được ưa chuộng, không chỉ vì mẫu mã đẹp,
+												chất lượng tuyệt hảo mà còn bởi sự tin tưởng vào uy tín của tập đoàn đến
+												từ nước Đức này.
+											</p>
+											<a class="btn btn-default" href="/sanpham/5" role="button">Xem Chi Tiết</a>
+
+										</div>
+									</li>
+								</ul>
+								<div class="direction-nav hidden-sm">
+									<div class="next">
+										<a><img src="/img/right-arrow.png" alt="" /></a>
+									</div>
+									<div class="prev">
+										<a><img src="/img/left-arrow.png" alt="" /></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Thế Mạnh -->
+		<!-- 	<section class="reservation">
+				<div class="container">
+					<section class="about-info2 padding-main" data-post="achievement">
+						<div class="title-inner on-show">
+							<h2>Thế mạnh của BepShop</h2>
+						</div>
+						<div class="content-wrap">
+							<section class="txt-info2 ani-item on-show">
+								<p style="text-align: justify">
+									<strong>HỆ THỐNG BEPSHOP SANG TRỌNG VÀ HIỆN ĐẠI</strong>
+								</p>
+								<p style="text-align: justify">
+									Không chỉ thu hút bởi các sản phẩm thông minh và tinh tế,
+									BepShop còn đặc biệt nổi danh nhờ hệ thống BepShop sang
+									trọng tại những thành phố lớn
+								</p>
+								<p style="text-align: justify">
+									Lấy ý tưởng từ các trung tâm nội thất lớn và hiện đại trên
+									thế giới như Ý, Đức... BepShop mong muốn tạo nên một không
+									gian tích hợp đầy đủ các sản phẩm, giải pháp và thiết bị bếp
+									cao cấp để đáp ứng nhu cầu ngày càng cao của chủ đầu tư, tư
+									vấn thiết kế, các đơn vị thi công và khách hàng tiêu dùng.
+								</p>
+								<p style="text-align: justify">
+									<strong>HỆ THỐNG DÂY CHUYỀN VÀ CÔNG NGHỆ HIỆN ĐẠI</strong>
+								</p>
+								<p style="text-align: justify">
+									Bên cạnh nguồn hàng chủ lực của BepShop được OEM từ các nhà
+									sản xuất lớn và danh tiếng trên thế giới từ Tây Ban Nha, Ý,
+									Ba Lan, Thổ Nhĩ Kỳ, Trung Quốc,... để đảm bảo cung cấp nhanh
+									cho thị trường. Hỗ trợ về mặt kỹ thuật (tại nhà máy Bình
+									Dương, BepShop lắp ráp bếp gas và một phần nhỏ bếp điện và
+									bếp từ nhằm tạo ra những mẫu mã đa dạng phong phú về màu sắc
+									mặt kính theo gu thẩm mỹ của người Việt).<br />
+								</p>
+								<p style="text-align: justify">
+									Để đảm bảo cung cấp nhanh chóng cho thị trường những sản
+									phẩm chất lượng cao, BepShop đã trang bị hệ thống máy móc
+									với đầy đủ tại nhà máy được đầu tư và mở rộng ở Bình Dương.
+									Đây là nhà máy có quy chuẩn khắt khe cùng nhiều trang thiết
+									bị hiện đại, các sản phẩm của BepShop được lắp ráp tại đây
+									sẽ được các chuyên gia nước ngoài hỗ trợ về mặt kỹ thuật.
+								</p>
+								<p style="text-align: justify">
+									SAP ERP (Enterprise Resource Planning Software) phục vụ như
+									một công cụ giúp tự động hóa một phần hoặc tất cả quy trình
+									sản xuất, từ việc chuẩn bị nguyên vật liệu cho đến ra thành
+									phẩm, quản lý đầu ra, đầu vào, đóng gói và nhiều thứ khác.
+									SAP cung cấp một loạt các kế hoạch nguồn lực doanh nghiệp
+									(ERP) các ứng dụng bao gồm cả quản lý quan hệ khách hàng
+									(CRM-Customer Relationship Management), quản lý tài chính,
+									quản lý nguồn nhân lực, quản lý dòng sản phẩm, và quản lý
+									chuỗi cung ứng...
+								</p>
+							</section>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<!-- Our features-->
+		<!--  	<section class="features">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="page-header wow fadeInDown">
+								<h1 class="white">
+									Sản Phẩm Của Chúng Tôi<small>Tận tâm đến những điều nhỏ nhất</small>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="row wow fadeInUp">
+						<div class="col-md-4 col-sm-6">
+							<div class="features-tile">
+								<div class="features-img">
+									<img src="/image/bepdien1.jpg" />
+								</div>
+								<div class="features-content">
+									<div class="page-header">
+										<a href="/sanpham/4">
+											<h1>Bếp từ Bosch 2E</h1>
+										</a>
+									</div>
+									<p>
+										Bếp từ đôi thiết kế hiện đại, có thể lắp âm, tiết kiệm không gian.
+										Nấu chín thức ăn nhanh, tiết kiệm thời gian với tổng công suất hoạt động lên đến
+										3200W.
+										Mặt kính ceramic Eurokera chịu lực tốt.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="features-tile">
+								<div class="features-img">
+									<img src="image/hutmui6.png" />
+								</div>
+								
+								<div class="features-content">
+									<div class="page-header">
+										<a href="/sanpham/15">
+										<br>
+											<h1>Máy hút mùi Bosch DF</h1>
+											
+										</a>
+										
+									</div>
+									<p>
+										Thiết kế áp tường gọn gàng, phù hợp cho các gian bếp nhỏ hẹp.
+										Công suất hút 500 m3/h với 3 tốc độ điều chỉnh và 1 chế độ tăng cường.
+										Đi kèm có bộ khử mùi than hoạt tính, tiện dùng cho thiết kế nhà lô.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="features-tile">
+								<div class="features-img">
+									<img src="image/mayruabat4.jpg" alt="" />
+								</div>
+								<div class="features-content">
+									<div class="page-header">
+										<a href="/sanpham/21">
+										<br>
+											<h1>Máy Rửa Bát Bosch 1E</h1>
+										</a>
+									</div>
+									<p>
+										Thiết kế dạng thùng với kiểu dáng hiện đại theo phong cách châu Âu, thích hợp
+										cho biệt thự và chung cư....
+										Yên tĩnh, hoạt động êm ái.Tiết kiệm nước với lượng nước tiêu thụ khoảng 9,5 lít/ lần rửa.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section> -->
+			<!-- Thành tựu -->
+			<!--  <section class="reservation">
+				<div class="container">
+					<section class="about-info2 padding-main" data-post="achievement">
+						<div class="title-inner on-show">
+							<h2>Thành tựu đáng kể</h2>
+						</div>
+						<div class="content-wrap">
+							<section class="txt-info2 ani-item on-show">
+								<p style="text-align: justify">
+									<strong>NHIỀU THÀNH TỰU ĐÁNG KỂ</strong>
+								</p>
+								<p style="text-align: justify">
+									Nhờ chất lượng trong sản phẩm, BepShop liên tục đạt các giải
+									thưởng uy tín như giải thưởng Tin &amp; Dùng Việt Nam do
+									Thời báo Kinh Tế Việt Nam (Ấn phẩm Tư vấn Tiêu và Dùng) tổ
+									chức năm 2012, 2013, 2015, 2016, 2017.
+								</p>
+								<p style="text-align: justify">
+									Top 10 Thương hiệu - Hàng hóa - Dịch Vụ Việt Nam khuyên dùng
+									do hội chống hàng giả và bảo vệ thương hiệu Thành phố Hà Nội
+									phối hợp Câu Lạc Bộ Doanh nhân Đất Việt, các cơ quan chức
+									năng tổ chức.
+								</p>
+								<p style="text-align: justify">
+									Giải thưởng FAST500 do báo điện tử VietNamNet và công ty CP
+									Báo cáo Đánh giá Việt Nam (Vietnam Report) sáng lập và tổ
+									chức.
+								</p>
+								<p style="text-align: justify">
+									Ngoài ra BepShop cũng đồng thời là nhà tài trợ chính cho
+									chương trình Bất động sản Việt Nam (Vietnam Property Awards
+									2017, 2018)...<br />
+								</p>
+								<p style="text-align: justify">
+									<strong>DỊCH VỤ BẢO HÀNH TOÀN DIỆN, LÂU DÀI</strong><br />
+								</p>
+								<p style="text-align: justify">
+									Bên cạnh hoàn thiện hệ thống phân phối, BepShop còn tập
+									trung xây dựng đội ngũ nhân viên tư vấn nhiệt tình được đào
+									tạo đầy đủ chuyên môn và kỹ năng. Đồng thời, với phương châm
+									đem đến các sản phẩm, dịch vụ tốt nhất với chế độ: “Bảo hành
+									3 năm – chăm sóc trọn đời”. Đây là chính sách chăm sóc khách
+									hàng toàn diện, lâu dài trong ngành thiết bị nhà bếp tại
+									Việt Nam hiện nay. BepShop mong muốn đem lại trải nghiệm
+									hoàn hảo cho khách hàng.
+								</p>
+							</section>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<!-- Footer-->
+			<section class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-sm-12">
+							<!--  --><h1>Về chúng tôi</h1>
+							<p>
+								CÔNG TY TNHH TheGioiBep
+								.<br>
+								Giấy phép kinh doanh: 0313728397
+								.<br>
+							Sở kế hoạch và đầu tư thành phố Hồ Chí Minh
+							</p>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<h1>Liên hệ</h1>
+							<div class="footer-social-icons">
+								<a href="http://www.facebook.com">
+									<i class="fa fa-facebook-square"></i>
+								</a>
+								<a href="http://www.twitter.com">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a href="http://plus.google.com">
+									<i class="fa fa-google"></i>
+								</a>
+								<a href="http://www.youtube.com">
+									<i class="fa fa-youtube-play"></i>
+								</a>
+								<a href="http://www.vimeo.com">
+									<i class="fa fa-vimeo"></i>
+								</a>
+								<a href="http://www.pinterest.com">
+									<i class="fa fa-pinterest-p"></i>
+								</a>
+								<a href="http://www.linkedin.com">
+									<i class="fa fa-linkedin"></i>
+								</a>
+							</div>
+							<div class="footer-address">
+								<p>
+									<i class="fa fa-map-marker"></i>97 Man Thiện, P. Hiệp Phú,Quận 9
+								</p>
+								<p>
+									<i class="fa fa-phone"></i>Phone: 0904 556 055 – 0936 266 911
+								</p>
+								<p><i class="fa fa-envelope-o"></i>bepshop@gmail.com</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<!-- Javascript -->
+	<script src="js/vendor/jquery-1.11.2.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery.flexslider-min.js"></script>
+	<script src="js/vendor/spectragram.js"></script>
+	<script src="js/vendor/owl.carousel.min.js"></script>
+	<script src="js/vendor/velocity.min.js"></script>
+	<script src="js/vendor/velocity.ui.min.js"></script>
+	<script src="js/vendor/bootstrap-datepicker.min.js"></script>
+	<script src="js/vendor/bootstrap-clockpicker.min.js"></script>
+	<script src="js/vendor/jquery.magnific-popup.min.js"></script>
+	<script src="js/vendor/isotope.pkgd.min.js"></script>
+	<script src="js/vendor/slick.min.js"></script>
+	<script src="js/vendor/wow.min.js"></script>
+	<script src="js/animation.js"></script>
+	<script src="js/vendor/vegas/vegas.min.js"></script>
+	<script src="js/vendor/jquery.mb.YTPlayer.js"></script>
+	<script src="js/vendor/jquery.stellar.js"></script>
+	<script src="js/vendor/mc/jquery.ketchup.all.min.js"></script>
+	<script src="js/vendor/mc/main.js"></script>
+	<script src="js/vendor/validate.js"></script>
+	<script src="js/reservation.js"></script>
+	<!-- Main JS -->
+	<script src="js/main.js"></script>
+	<!--
+    <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '5f5eae6e-cc5e-48c9-a19a-90dbc884473e', f: true }); done = true; } }; })();</script>
+  -->
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+		var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+		(function () {
+			var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+			s1.async = true;
+			s1.src = 'https://embed.tawk.to/607bb0a3f7ce1827093b7736/1f3hik00n';
+			s1.charset = 'UTF-8';
+			s1.setAttribute('crossorigin', '*');
+			s0.parentNode.insertBefore(s1, s0);
+		})();
+	</script>
+	<!--End of Tawk.to Script-->
+	<!--thanh tim kiem-->
+	<script src="/js/xuly.js"> </script>
+</body>
+
+</html>

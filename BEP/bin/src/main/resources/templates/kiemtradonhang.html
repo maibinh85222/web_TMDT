@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Đặt hàng</title>
+    <meta name="author" content="Surjith S M" />
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Tomato is a Responsive HTML5 Template for Restaurants and food related services."
+    />
+    <meta
+      name="keywords"
+      content="tomato, responsive, html5, restaurant, template, food, reservation"
+    />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- Responsive Tag -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="css/plugin.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
+    <![endif]-->
+
+    <!-- Preloder-->
+    <div class="preloder animated">
+      <div class="scoket">
+        <img src="img/preloader.svg" alt="" />
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="main-wrapper">
+       <!-- Navigation-->
+        <nav class="navbar navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button
+                type="button"
+                class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-controls="navbar"
+              >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="./trangchu">
+                <h1>BepShop</h1>
+              </a>
+              <div class="container">
+							<input type="text" id="myInput" placeholder="Nhập tên sản phẩm ..."
+								title="Nhập tên sản phẩm bạn muốn tìm kiếm">
+				      </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <a
+                    href="./trangchu"
+                    class="dropdown-toggle"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Trang Chủ</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="gioithieu"
+                    class="dropdown-toggle"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Giới Thiệu</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="sanpham"
+                    class="dropdown-toggle"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Sản Phẩm</a
+                  >
+                </li>
+               <li class="dropdown">
+                  <a
+                    href="./xemgiohang"
+                    class="css-pointer dropdown-toggle"
+                    data-toggle="dropdown"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ><i class="fa fa-shopping-cart fsc pull-left"></i
+                    >
+                    <div th:if ="${session.login == null}"
+                    <span class="cart-number">0</span>
+                    </div>
+                    <div th:if ="${session.login != null}"
+                    <span class="cart-number" th:text="${session.sogh}"></span>
+                    </div>
+                    <span class="caret"></span>
+                   <div class="cart-content dropdown-menu">
+                    <div class="cart-title">
+                      <h4>Giỏ hàng</h4>
+                    </div>
+                    <div class="cart-items" th:each="listgh : ${session.listgh}">
+											<div class="cart-item clearfix">
+												<div class="cart-item-image">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}"><img
+															style="width: 48px;"
+															th:src="@{${'/image/' + listgh.URLHinh 	}}"
+															alt="Breakfast with coffee" /></a>
+												</div>
+												<div class="cart-item-desc">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}">
+														<span th:utext="${listgh.TenSP}"></span>
+													</a>
+													<span  class="cart-item-price" th:inline="text">[[${#numbers.formatDecimal(listgh.Gia, 0, 'COMMA', 0, 'POINT')}]]</span>
+													<span> x </span>
+													<span class="cart-item-quantity" th:utext="${listgh.SL}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="cart-action clearfix" th:if="${session.sogh}!=0">
+											<div class="clearfix" th:if="${session.login}!=null">
+												<span class="pull-left " style="font-size: 23px;" >[[${#numbers.formatDecimal(session.tongtien, 0, 'COMMA', 0, 'POINT')}]] VND</span>
+												<a class="btn btn-default pull-right" href="./xemgiohang">Xem giỏ
+													hàng</a>
+											</div>
+
+										</div>
+                  </div>
+                  </a>
+                </li>
+                <li class="dropdown" th:if ="${session.login == null}">
+                  <a
+                    href="dangnhap"
+                    class="dropdown-toggle"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Đăng nhập</a
+                  >	
+                </li>
+                <li class="dropdown" th:if ="${session.login}">
+                  <a
+                  href="#"
+                    class="dropdown-toggle"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ><i class="fa fa-user fsc pull-left"></i><span style ="color:#f9c56a" th:text="${session.login.Username}"></span> <span class="caret"></span
+                  ></a>
+                  <div class="cart-content dropdown-menu">
+                  
+                  	<div class="cart-items">
+                      <div class="cart-item clearfix">
+                        <div class="cart-item-desc">
+                          <a href="thongtinkhachhang"
+                            >Tài khoản của tôi</a
+                          >
+                        </div>
+                      </div>
+                  	</div>
+                  	<div class="cart-action">
+                      <div class="cart-item clearfix">
+                        <div class="cart-item-desc">
+                          <a href="dangxuat">Đăng xuất</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!--/.navbar-collapse -->
+            <div class = "container">
+						<ul id="myUL">
+							<li th:each="listsp : ${listsp}">
+								<a th:href="@{/sanpham/{IDSP}(IDSP=${listsp.IDSP})  }">
+									<img th:src="@{${'/image/' + listsp.URLHinh 	}}" style="width: 50px;">
+									<span th:utext="${listsp.TenSP}"></span>
+									<div class="product-price-search" th:if="*{listsp.GiaKM}!=0">
+										<strike><span th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b> VND</b></strike> <br>
+											<span th:utext = "${#numbers.formatDecimal(listsp.GiaKM, 0, 'COMMA',0,'POINT')}"></span><b> VND</b>
+									</div>
+									 <div class="product-price-search" th:if = "${listsp.GiaKM} == 0">
+										<span th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b> VND</b><br>
+									 </div>
+								</a>
+							</li>
+				        </ul>
+					</div>
+          </div>
+        </nav>
+
+        <!-- Page Header -->
+        <section class="page_header">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2 class="text-uppercase">KIỂM TRA VÀ TIẾN HÀNH ĐẶT HÀNG</h2>
+                <p>Niềm vui của khách hàng là hạnh phúc của chúng tôi</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Checkout Form -->
+        <section class="shop-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="billing-details">
+                      <h3 class="text-left">
+                        Thông tin người nhận và địa chỉ nhận hàng
+                      </h3>
+                      <br />
+                      <form>
+                        <label class="">Quốc Gia </label>
+                        <select class="form-control">
+                          <option value="">Chọn thành phố</option>
+                          <option value="AX">Aland Islands</option>
+                          <option value="AF">Afghanistan</option>
+                          <option value="AL">Albania</option>
+                          <option value="DZ">Algeria</option>
+                          <option value="AD">Andorra</option>
+                          <option value="AO">Angola</option>
+                          <option value="AI">Anguilla</option>
+                          <option value="AQ">Antarctica</option>
+                          <option value="AG">Antigua and Barbuda</option>
+                          <option value="AR">Argentina</option>
+                          <option value="AM">Armenia</option>
+                          <option value="AW">Aruba</option>
+                          <option value="AU">Australia</option>
+                          <option value="AT">Austria</option>
+                          <option value="AZ">Azerbaijan</option>
+                          <option value="BS">Bahamas</option>
+                          <option value="BH">Bahrain</option>
+                          <option value="BD">Bangladesh</option>
+                          <option value="BB">Barbados</option>
+                        </select>
+                        <div class="clearfix space20"></div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Họ </label>
+                            <input
+                              class="form-control"
+                              placeholder="Vui lòng nhập họ ..."
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label>Tên </label>
+                            <input
+                              class="form-control"
+                              placeholder="Vui lòng nhập tên..."
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                        <div class="clearfix space20"></div>
+                        <label>Tên công ty</label>
+                        <input
+                          class="form-control"
+                          placeholder="Vui lòng nhập tên công ty (nếu có)."
+                          value=""
+                          type="text"
+                        />
+                        <div class="clearfix space20"></div>
+                        <label>Địa chỉ </label>
+                        <input
+                          class="form-control"
+                          placeholder="Vui lòng nhập địa chỉ..."
+                          value=""
+                          type="text"
+                        />
+                        <div class="clearfix space20"></div>
+                        <input
+                          class="form-control"
+                          placeholder="Apartment, suite, unit etc. (optional)"
+                          value=""
+                          type="text"
+                        />
+                        <div class="clearfix space20"></div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label>Thành phố/ Tỉnh </label>
+                            <input
+                              class="form-control"
+                              placeholder="Thành phố/ Tỉnh"
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-4">
+                            <label>Quận/Huyện</label>
+                            <input
+                              class="form-control"
+                              value=""
+                              placeholder="Quận/Huyện"
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-4">
+                            <label>Phường / Xã </label>
+                            <input
+                              class="form-control"
+                              placeholder="Phường / Xã"
+                              value=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                        <div class="clearfix space20"></div>
+                        <label>Ghi chú</label>
+                        <textarea
+                          class="form-control"
+                          placeholder="Vui lòng điền vào ghi chú nếu có ! "
+                          rows="4"
+                          cols="5"
+                        ></textarea>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <h4 class="text-left">Đơn hàng của bạn</h4>
+                <br />
+                <table class="table table-bordered extra-padding">
+                  <tbody>
+                    <tr>
+                      <th>Tổng tiền sản phẩm</th>
+                      <td><span class="amount">£190.00</span></td>
+                    </tr>
+                    <tr>
+                      <th>Phí vận chuyển</th>
+                      <td>Miễn Phí</td>
+                    </tr>
+                    <tr>
+                      <th>Tổng tiền</th>
+                      <td>
+                        <strong><span class="amount">£190.00</span></strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br />
+                <h4 class="text-left">Phương thức thanh toán</h4>
+                <br />
+                <div class="payment-method">
+                  <div class="row">
+                    <form>
+                      <div class="col-md-4">
+                        <label>
+                          <input
+                            name="payment"
+                            id="radio1"
+                            class="css-checkbox"
+                            type="radio"
+                          /><span>Chuyển khoản trực tiếp</span></label
+                        >
+                        <div class="space20"></div>
+                        <p>
+                          Thực hiện thanh toán trực tiếp vào tài khoản ngân hàng
+                          của chúng tôi và sử dụng mã đơn đặt hàng của bạn làm
+                          tham chiếu.
+                        </p>
+                      </div>
+                      <div class="col-md-4">
+                        <label>
+                          <input
+                            name="payment"
+                            id="radio2"
+                            class="css-checkbox"
+                            type="radio"
+                          /><span>Thanh toán khi nhận hàng.</span></label
+                        >
+                        <div class="space20"></div>
+                        <p>Bạn sẽ thanh toán sau khi nhận được hàng.</p>
+                      </div>
+                      <div class="col-md-4">
+                        <label>
+                          <input
+                            name="payment"
+                            id="radio3"
+                            class="css-checkbox"
+                            type="radio"
+                          /><span>Paypal</span></label
+                        >
+                        <div class="space20"></div>
+                        <p>Thanh toán qua PayPal.</p>
+                      </div>
+                    </form>
+                  </div>
+                  <br />
+                  <form class="text-center">
+                    <input
+                      name="checkboxG2"
+                      id="checkboxG2"
+                      class="css-checkbox"
+                      type="checkbox"
+                    /><span
+                      >Tôi đã đọc và chấp nhận các
+                      <a href="./index.html">điều khoản điều kiện</a></span
+                    >
+                  </form>
+
+                  <div class="text-center top-space-lg">
+                    <a
+                      href="./chitietdonhang.html"
+                      class="btn btn-default btn-lg"
+                      >XÁC NHẬN</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Footer-->
+        <section class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-12">
+                <h1>Về chúng tôi</h1>
+                <p>
+                  Hệ thống sản phẩm của BepShop bao gồm bếp từ, hút mùi, lò
+                  nướng, lò vi sóng, đồ gia dụng,… với nhiều mẫu mã, giá cả đa
+                  dạng, phù hợp với nhiều phong cách nhà bếp và kinh tế của từng
+                  gia đình. Đến với chúng tôi, chắc chắn bạn sẽ hoàn toàn hài
+                  lòng bởi những gì bạn cần cho tổ ấm của mình đều có tại
+                  BepShop tại TP.HCM
+                </p>
+                <a href="./gioithieu.html"> Đọc thêm &rarr;</a>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <h1>Liên hệ</h1>
+                <div class="footer-social-icons">
+                  <a href="http://www.facebook.com">
+                    <i class="fa fa-facebook-square"></i>
+                  </a>
+                  <a href="http://www.twitter.com">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="http://plus.google.com">
+                    <i class="fa fa-google"></i>
+                  </a>
+                  <a href="http://www.youtube.com">
+                    <i class="fa fa-youtube-play"></i>
+                  </a>
+                  <a href="http://www.vimeo.com">
+                    <i class="fa fa-vimeo"></i>
+                  </a>
+                  <a href="http://www.pinterest.com">
+                    <i class="fa fa-pinterest-p"></i>
+                  </a>
+                  <a href="http://www.linkedin.com">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </div>
+                <div class="footer-address">
+                  <p>
+                    <i class="fa fa-map-marker"></i>97 Man Thiện, P. Hiệp Phú,
+                    Quận 9
+                  </p>
+                  <p>
+                    <i class="fa fa-phone"></i>Phone: 0904 556 055 – 0936 266
+                    911
+                  </p>
+                  <p><i class="fa fa-envelope-o"></i>bepshop@gmail.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/607bb0a3f7ce1827093b7736/1f3hik00n';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+    <!-- Javascript -->
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery.flexslider-min.js"></script>
+    <script src="js/vendor/spectragram.js"></script>
+    <script src="js/vendor/owl.carousel.min.js"></script>
+    <script src="js/vendor/velocity.min.js"></script>
+    <script src="js/vendor/velocity.ui.min.js"></script>
+    <script src="js/vendor/bootstrap-datepicker.min.js"></script>
+    <script src="js/vendor/bootstrap-clockpicker.min.js"></script>
+    <script src="js/vendor/jquery.magnific-popup.min.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/vendor/slick.min.js"></script>
+    <script src="js/vendor/wow.min.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/vendor/vegas/vegas.min.js"></script>
+    <script src="js/vendor/jquery.mb.YTPlayer.js"></script>
+    <script src="js/vendor/jquery.stellar.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/vendor/mc/jquery.ketchup.all.min.js"></script>
+    <script src="js/vendor/mc/main.js"></script>
+    <!--thanh tim kiem-->
+<script src="/js/xuly.js"> </script>
+  </body>
+</html>

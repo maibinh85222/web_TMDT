@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Chi tiết sản phẩm</title>
+	<meta name="author" content="Surjith S M" />
+
+	<!-- SEO -->
+	<meta name="description"
+		content="Tomato is a Responsive HTML5 Template for Restaurants and food related services." />
+	<meta name="keywords" content="tomato, responsive, html5, restaurant, template, food, reservation" />
+
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="/img/favicon.ico" />
+
+	<!-- Responsive Tag -->
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="/css/plugin.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+<link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+	<!--[if lt IE 9]>
+      <script src="/js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<!--[if lt IE 8]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
+    <![endif]-->
+
+	<!-- Preloder-->
+	<div class="preloder animated">
+		<div class="scoket">
+			<img src="/img/preloader.svg" alt="" />
+		</div>
+	</div>
+
+	<div class="body">
+		<div class="main-wrapper">
+			<!-- Navigation-->
+			<nav class="navbar navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="./trangchu">
+							<h1>BepShop</h1>
+						</a>
+						<div class="container">
+							<input type="text" id="myInput" placeholder="Nhập tên sản phẩm ..."
+								title="Nhập tên sản phẩm bạn muốn tìm kiếm">
+				      </div>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right" style="margin-top: -60px;">
+							<li>
+								<a href="/trangchu" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Trang Chủ</a>
+							</li>
+							<li>
+								<a href="/gioithieu" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Giới Thiệu</a>
+							</li>
+							<li>
+								<a href="/sanpham" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Sản Phẩm</a>
+							</li>
+							<li class="dropdown">
+								<a href="/xemgiohang" class="css-pointer dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false"><i
+										class="fa fa-shopping-cart fsc pull-left"></i>
+									<div th:if="${session.login == null}" <span class="cart-number">0</span>
+									</div>
+									<div th:if="${session.login != null}" <span class="cart-number"
+										th:text="${session.sogh}"></span>
+									</div>
+									<span class="caret"></span>
+									<div class="cart-content dropdown-menu">
+										<div class="cart-title">
+											<h4>Giỏ hàng</h4>
+										</div>
+										<div class="cart-items" th:each="listgh : ${session.listgh}">
+											<div class="cart-item clearfix">
+												<div class="cart-item-image">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}"><img
+															style="width: 48px;"
+															th:src="@{${'/image/' + listgh.URLHinh 	}}"
+															alt="Breakfast with coffee" /></a>
+												</div>
+												<div class="cart-item-desc">
+													<a th:href="@{/sanpham/{IDSP}(IDSP=${listgh.IDSP})}">
+														<span th:utext="${listgh.TenSP}"></span>
+													</a>
+													<span class="cart-item-price" th:inline="text">[[${#numbers.formatDecimal(listgh.Gia, 0, 'COMMA', 0, 'POINT')}]]</span>
+													<span> x </span>
+													<span class="cart-item-quantity" th:utext="${listgh.SL}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="cart-action clearfix" th:if="${session.sogh}!=0">
+											<div class="clearfix" th:if="${session.login}!=null">
+												<span class="pull-left " style="font-size: 23px;" >[[${#numbers.formatDecimal(session.tongtien, 0, 'COMMA', 0, 'POINT')}]] VND</span>
+												<a class="btn btn-default pull-right" href="/xemgiohang">Xem giỏ
+													hàng</a>
+											</div>
+
+										</div>		                  
+										</div>
+			                  </a>
+			                </li>
+							<li class="dropdown" th:if="${session.login == null}">
+								<a href="/dangnhap" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false">Đăng nhập</a>
+							</li>
+							<li class="dropdown" th:if="${session.login}">
+								<a href="#" class="dropdown-toggle" role="button" aria-haspopup="true"
+									aria-expanded="false"><i class="fa fa-user fsc pull-left"></i><span
+										style="color: #f9c56a" th:text="${session.login.Username}"></span> <span
+										class="caret"></span></a>
+								<div class="cart-content dropdown-menu">
+									<div class="cart-items">
+										<div class="cart-item clearfix">
+											<div class="cart-item-desc">
+												<a href="/thongtinkhachhang">Tài khoản của tôi</a>
+											</div>
+										</div>
+									</div>
+									<div class="cart-action">
+										<div class="cart-item clearfix">
+											<div class="cart-item-desc">
+												<a href="/dangxuat">Đăng xuất</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!--/.navbar-collapse -->
+					<div class = "container">
+						<ul id="myUL">
+							<li th:each="listsp : ${listsp}">
+								<a th:href="@{/sanpham/{IDSP}(IDSP=${listsp.IDSP})  }">
+									<img th:src="@{${'/image/' + listsp.URLHinh 	}}" style="width: 50px;">
+									<span th:utext="${listsp.TenSP}"></span>
+									<div class="product-price-search" th:if="*{listsp.GiaKM}!=0">
+										<strike><span th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b> VND</b></strike> <br>
+											<span th:utext = "${#numbers.formatDecimal(listsp.GiaKM, 0, 'COMMA',0,'POINT')}"></span><b> VND</b>
+									</div>
+									 <div class="product-price-search" th:if = "${listsp.GiaKM} == 0">
+										<span th:utext="${#numbers.formatDecimal(listsp.Gia, 0, 'COMMA',0,'POINT')}"></span><b> VND</b><br>
+									 </div>
+								</a>
+							</li>
+				        </ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Page Header -->
+			<section class="page_header" style="padding: 100px 0 40px;">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h2 class="text-uppercase">BEPSHOP</h2>
+							<p>Nơi cung cấp tất cả những gì khách hàng cần </p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Shop Content -->
+			<section class="shop-content">
+				<div class="container" th:object=${sp}>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="single-shop-carousel">
+								<div>
+									<img class="/img-responsive" th:src="@{${'/image/' + sp.URLHinh}}" alt="" />
+								</div>
+							</div>
+							<div class="single-shop-carousel-nav">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-6 shop-single-info">
+							<div class="shop-single-title">
+								<h3 class="text-left" th:text="*{TenSP}"></h3>
+							</div>
+							<div class="shop-single-price">
+								<div class="product-price" style="text-align: left;" th:if="*{GiaKM !=0}">
+									<label>Giá Gốc : </label>
+									<strike><b> [[${#numbers.formatDecimal(sp.Gia, 0, 'COMMA', 0, 'POINT')}]] VND</b></strike><br>
+									<label>Giá Khuyến Mãi : </label>
+									<b>[[${#numbers.formatDecimal(sp.GiaKM, 0, 'COMMA', 0, 'POINT')}]] VND</b>
+								</div>
+								<div class="product-price" style="text-align: left;" th:if="*{GiaKM}==0">
+									<label>Giá Gốc :</label>
+									<span th:utext="*{Gia}"></span><b> VND</b><br>
+								</div>
+								<div style="text-align: left; font-size: 16px;font-family: Josefin Sans;">
+									<label>Số Lượng Còn Lại :</label>
+									<span th:utext="*{SL}"></span>
+									<i class="fa fa-eye" style="font-size: 24px; padding-left: 320px;"> <span
+											th:utext="*{SoLuotXem}"></span></i>
+								</div>
+								<div class="rc-ratings pull-right">
+									<span class="fa fa-star active"></span>
+									<span class="fa fa-star active"></span>
+									<span class="fa fa-star active"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+								</div>
+							</div>
+							<p th:text="*{TieuDe}">
+							</p>
+							<div class="quantity" th:if="*{SL} != 0">
+							<div th:object=${slm}>
+								<label>Số lượng bạn muốn mua :</label>
+
+								<input  type="number" id="slmua" th:value="*{slmua}" name="slmua" min="1" th:max="*{SL}" th:onchange="'change('${sp.IDSP}','${session.login.Username}')'" />
+								<div class="shop-meta" th:if="${session.login != null}">
+								
+									<a th:href="@{/cgiohang(IDSP=*{IDSP},SL=*{slmua},KH=${session.login.Username})}" id="link"
+										class="pull-left"><i class="fa fa-plus-square"></i> Thêm vào giỏ
+									</a>
+									<a th:href="@{/muangay(IDSP=*{IDSP},SL=*{slmua},KH=${session.login.Username})}" id="linkmua" class="pull-right"><i
+											class="fa fa-shopping-cart"></i> Mua ngay</a>
+								</div>
+								<div class="shop-meta" th:if="${session.login == null}">
+									<a href="/dangnhap" class="pull-left"><i class="fa fa-plus-square"></i> Thêm vào giỏ
+									</a>
+									<a href="/dangnhap" class="pull-right"><i class="fa fa-shopping-cart"></i> Mua
+										ngay</a>
+								</div>
+								
+							</div>
+							</div>
+
+							<div class="quantity" th:if="*{SL} == 0">
+								<p style="color: red;">Hết hàng!! Bạn vui lòng chọn sản phẩm khác</p>
+							</div>
+						</div>
+					</div>
+					<script>
+									function change(IDSP,IDKH){
+										var value = parseInt(document.getElementById("slmua").value,10);
+										document.getElementById("link").href="/vvvcgiohang?IDSP="+IDSP+"&SL="+value+"&KH="+IDKH;
+										alert(1);
+									}
+								</script>
+					<div class="clearfix"></div>
+
+					<div class="tab-style3">
+						<!-- Nav Tabs -->
+						<div class="align-center mb-40 mb-xs-30">
+							<ul class="nav nav-tabs tpl-minimal-tabs animate">
+								<li class="active">
+									<a aria-expanded="true" href="#mini-one" data-toggle="tab">CHI TIẾT SẢN PHẨM</a>
+								</li>
+								<li class="">
+									<a aria-expanded="false" href="#mini-two" data-toggle="tab">ĐÁNH GIÁ (<span th:utext="${sodg}"/>)</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End Nav Tabs -->
+
+						<!-- Tab panes -->
+						<div style="height: auto" class="tab-content tpl-minimal-tabs-cont align-center section-text">
+							<div class="tab-pane fade active in" id="mini-one">
+								<p th:text="*{MoTa}">
+								</p>
+								 <p class="list">
+                    <span
+                      ><i class="fa fa-angle-right"></i> Miễn phí giao hàng trên toàn quốc.</span
+                    >
+                    <span
+                      ><i class="fa fa-angle-right"></i> Cam kết hàng chính hãng.</span
+                    >
+                    <span
+                      ><i class="fa fa-angle-right"></i> Gọi 1900 9001 hỗ trợ khách hàng 24/7.</span
+                    >
+                  </p>
+							</div>
+							<div class="tab-pane fade" id="mini-two" >
+								<div class="col-md-12" id="mucdanhgia">
+									<h4 class="text-left">Một số bình luận tiêu biểu</h4>
+									<br />
+									<ul class="comment-list" th:each="listdg : ${listdg}">
+										<li>
+											<a class="pull-left" href=""><img class="comment-avatar"
+													src="/img/xtra/1.jpg" alt="" height="50" width="50" /></a>
+											<div class="comment-meta">
+												<span th:utext="${listdg.TenKH}"/>
+												<span>
+													<em  th:utext="${listdg.NgayDG}"></em>
+												</span>
+											</div>
+											<div class="rating2" th:switch="${listdg.Diem}"> 
+											<span th:case="10"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></span>
+											<span th:case="8"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span></span>
+											<span th:case="6"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span><span>&#9734;</span></span>
+											<span th:case="4"><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></span>
+											<span th:case="2"><span>&#9733;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span></span>
+											</div>
+											<p>
+												<span th:utext="${listdg.NoiDung}"/>
+											</p>
+										</li>
+									</ul>
+									<br />
+									<span th:if="${session.danhgia !=null}">
+									<h4 class="text-left">Gửi bình luận         </h4>
+									<div th:if ="${session.mess_dg}">
+									 <span style="color: RED;" th:text="${session.mess_dg.thongbao}"></span>
+									 </div>
+									<br />
+									<form id="form " class="review-form" th:action="@{/themdanhgia}" method="post" th:object="${session.danhgia}">
+										<div class="row">
+											<div class="col-md-6">
+												<input class="input-md form-control" th:value="${session.khdg.HoTen}"
+													 readonly="true" type="text" />
+													 <input name="IDKH" class="input-md form-control" th:value="${session.khdg.IDKH}"
+													 readonly="true" type="hidden" />
+													 <input name="IDSP" class="input-md form-control" th:value="${sp.IDSP}"
+													 readonly="true" type="hidden" />
+											</div>
+											<div class="col-md-6">
+												<input  class="input-md form-control" th:value="${session.khdg.Email}"
+												readonly="true" type="email" />
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<br/>
+										<span>Điểm đánh giá </span>
+										<br />
+										<div th:if="*{IDKH !=0}">
+										<div class="stars" th:switch="*{Diem}">
+										  <form action="">
+										  <span th:case="10">
+										  <input class="star star-5" id="star-5" type="radio" name="Diem" value="10" checked/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8"/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6"/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4"/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2"/>
+										    <label class="star star-1" for="star-1"></label>
+										  </span>
+										  <span th:case="8">
+										  <input class="star star-5" id="star-5" type="radio" name="Diem" value="10"/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8" checked/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6"/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4"/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2"/>
+										    <label class="star star-1" for="star-1"></label>
+										  </span>
+										  <span th:case="6">
+										  <input class="star star-5" id="star-5" type="radio" name="Diem" value="10"/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8"/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6" checked/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4"/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2"/>
+										    <label class="star star-1" for="star-1"></label>
+										  </span>
+										  <span th:case="4">
+										  <input class="star star-5" id="star-5" type="radio" name="Diem" value="10"/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8"/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6"/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4" checked/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2"/>
+										    <label class="star star-1" for="star-1"></label>
+										  </span>
+										  <span th:case="2">
+										  <input class="star star-5" id="star-5" type="radio" name="Diem" value="10"/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8"/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6"/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4"/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2" checked/>
+										    <label class="star star-1" for="star-1"></label>
+										  </span>
+										  </form>
+										</div>
+										<div class="clearfix"></div>
+										<br/>
+										<span>Nội dung</span>
+										<br />
+										<input name="NoiDung" class="input-md form-control" placeholder="Nhập nhận xét.." th:value="*{NoiDung}"
+													required type="text" />
+													<div class="clearfix"></div>
+										<button type="submit" class="btn btn-default" onclick="camon()">
+											CẬP NHẬT ĐÁNH GIÁ
+										</button>
+										</div>
+										<div th:unless="*{IDKH !=0}">
+										<div class="stars">
+										  <form action="">
+										    <input class="star star-5" id="star-5" type="radio" name="Diem" value="10" checked/>
+										    <label class="star star-5" for="star-5"></label>
+										    <input class="star star-4" id="star-4" type="radio" name="Diem" value="8"/>
+										    <label class="star star-4" for="star-4"></label>
+										    <input class="star star-3" id="star-3" type="radio" name="Diem" value="6"/>
+										    <label class="star star-3" for="star-3"></label>
+										    <input class="star star-2" id="star-2" type="radio" name="Diem" value="4"/>
+										    <label class="star star-2" for="star-2"></label>
+										    <input class="star star-1" id="star-1" type="radio" name="Diem" value="2"/>
+										    <label class="star star-1" for="star-1"></label>
+										  </form>
+										</div>
+										<div class="clearfix"></div>
+										<span>Nội dung</span>
+										<br />
+										<textarea type="text" name="NoiDung"  class="input-md form-control" rows="6"
+											placeholder="Nhập nhận xét.."  maxlength="400"></textarea>
+										<button type="submit" class="btn btn-default" onclick="camon()">
+											GỬI ĐÁNH GIÁ
+										</button>
+										</div>
+									</form>
+									</span>
+								</div>
+								<div class="clearfix space30"></div>
+							</div>
+						</div>
+					</div>
+					<div class="shop-products">
+						<h6>CÁC SẢN PHẨM NGẪU NHIÊN KHÁC</h6>
+						<div class="row">
+
+							<div class="col-md-3 col-sm-6" th:each="lisspnn : ${lisspnn}">
+								<div class="product-info">
+									<div class="product-img">
+										<a th:href="@{/sanpham/{IDSP}(IDSP=${lisspnn.IDSP})}">
+											<img th:src="@{${'/image/' + lisspnn.URLHinh 	}}">
+										</a>
+									</div>
+									<h4><a th:href="@{/sanpham/{IDSP}(IDSP=${lisspnn.IDSP})}"><span
+												th:utext="${lisspnn.TenSP}"></span></a></h4>
+									<div class="rc-ratings">
+										<span class="fa fa-star active"></span>
+										<span class="fa fa-star active"></span>
+										<span class="fa fa-star active"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</div>
+
+									<div class="product-price">
+										<strike><span th:utext="${#numbers.formatDecimal(lisspnn.Gia, 0, 'COMMA',0,'POINT')}"></span><b> VND</b></strike> <br>
+											 <span th:utext = "${#numbers.formatDecimal(lisspnn.GiaKM, 0, 'COMMA',0,'POINT')}"></span><b> VND</b></div>
+									
+									<div class="shop-meta" th:if ="${session.login != null}">
+												<a th:href="@{/cgiohang(IDSP=${lisspnn.IDSP},SL=1,KH=${session.login.Username})}" class="pull-left"><i
+														class="fa fa-plus-square"></i> Thêm vào giỏ
+												</a>
+												<a th:href="@{/muangay(IDSP=${lisspnn.IDSP},SL=1,KH=${session.login.Username})}" class="pull-right"><i
+														class="fa fa-shopping-cart"></i> Mua ngay</a>
+											</div>
+											<div class="shop-meta" th:if ="${session.login == null}">
+												<a href="/dangnhap" class="pull-left"><i
+														class="fa fa-plus-square"></i> Thêm vào giỏ
+												</a>
+												<a href="/dangnhap" class="pull-right"><i
+														class="fa fa-shopping-cart"></i> Mua ngay</a>
+											</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Footer-->
+			<section class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-sm-12">
+							<h1>Về chúng tôi</h1>
+							<p>
+								Hệ thống sản phẩm của BepShop bao gồm bếp từ, hút mùi, lò
+								nướng, lò vi sóng, đồ gia dụng,… với nhiều mẫu mã, giá cả đa
+								dạng, phù hợp với nhiều phong cách nhà bếp và kinh tế của từng
+								gia đình. Đến với chúng tôi, chắc chắn bạn sẽ hoàn toàn hài
+								lòng bởi những gì bạn cần cho tổ ấm của mình đều có tại
+								BepShop tại TP.HCM
+							</p>
+							<a href="./gioithieu.html"> Đọc thêm &rarr;</a>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<h1>Liên hệ</h1>
+							<div class="footer-social-icons">
+								<a href="http://www.facebook.com">
+									<i class="fa fa-facebook-square"></i>
+								</a>
+								<a href="http://www.twitter.com">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a href="http://plus.google.com">
+									<i class="fa fa-google"></i>
+								</a>
+								<a href="http://www.youtube.com">
+									<i class="fa fa-youtube-play"></i>
+								</a>
+								<a href="http://www.vimeo.com">
+									<i class="fa fa-vimeo"></i>
+								</a>
+								<a href="http://www.pinterest.com">
+									<i class="fa fa-pinterest-p"></i>
+								</a>
+								<a href="http://www.linkedin.com">
+									<i class="fa fa-linkedin"></i>
+								</a>
+							</div>
+							<div class="footer-address">
+								<p>
+									<i class="fa fa-map-marker"></i>97 Man Thiện, P. Hiệp Phú,
+									Quận 9
+								</p>
+								<p>
+									<i class="fa fa-phone"></i>Phone: 0904 556 055 – 0936 266
+									911
+								</p>
+								<p><i class="fa fa-envelope-o"></i>bepshop@gmail.com</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- Javascript -->
+	<script src="/js/vendor/jquery-1.11.2.min.js"></script>
+	<script src="/js/vendor/bootstrap.min.js"></script>
+	<script src="/js/vendor/jquery.flexslider-min.js"></script>
+	<script src="/js/vendor/spectragram.js"></script>
+	<script src="/js/vendor/owl.carousel.min.js"></script>
+	<script src="/js/vendor/velocity.min.js"></script>
+	<script src="/js/vendor/velocity.ui.min.js"></script>
+	<script src="/js/vendor/bootstrap-datepicker.min.js"></script>
+	<script src="/js/vendor/bootstrap-clockpicker.min.js"></script>
+	<script src="/js/vendor/jquery.magnific-popup.min.js"></script>
+	<script src="/js/vendor/isotope.pkgd.min.js"></script>
+	<script src="/js/vendor/slick.min.js"></script>
+	<script src="/js/vendor/wow.min.js"></script>
+	<script src="/js/animation.js"></script>
+	<script src="/js/vendor/vegas/vegas.min.js"></script>
+	<script src="/js/vendor/jquery.mb.YTPlayer.js"></script>
+	<script src="/js/vendor/jquery.stellar.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/vendor/mc/jquery.ketchup.all.min.js"></script>
+	<script src="/js/vendor/mc/main.js"></script>
+	
+	<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+	(function () {
+		var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+		s1.async = true;
+		s1.src = 'https://embed.tawk.to/607bb0a3f7ce1827093b7736/1f3hik00n';
+		s1.charset = 'UTF-8';
+		s1.setAttribute('crossorigin', '*');
+		s0.parentNode.insertBefore(s1, s0);
+	})();
+</script>
+<!--End of Tawk.to Script-->
+<!--thanh tim kiem-->
+<script src="/js/xuly.js"> </script>
+<script>  
+  function camon(){ document.getElementById("mucdanhgia").scrollIntoView();
+  }  
+</script>
+</body>
+
+</html>

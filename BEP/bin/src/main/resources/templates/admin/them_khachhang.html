@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>QUẢN TRỊ - THIẾT BỊ BẾP</title>
+	<!-- Favicon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+		type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+	<!-- Bootstrap Core Css -->
+	<link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Waves Effect Css -->
+	<link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+	<!-- Animation Css -->
+	<link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+	<!-- JQuery DataTable Css -->
+	<link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	<!-- Custom Css -->
+	<link href="css/style.css" rel="stylesheet">
+
+	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+	<link href="css/themes/all-themes.css" rel="stylesheet" />
+
+</head>
+
+<body class="theme-red">
+	<!-- Top Bar -->
+	<nav class="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar-collapse" aria-expanded="false"></a>
+				<a href="javascript:void(0);" class="bars"></a>
+				<a class="navbar-brand" href="index.htm">QUẢN TRỊ - THIẾT BỊ BẾP</a>
+			</div>
+		</div>
+	</nav>
+	<!-- #Top Bar -->
+	<section>
+		<!-- Left Sidebar -->
+		<aside id="leftsidebar" class="sidebar">
+			<!-- User Info -->
+			<div class="user-info">
+				<div class="image">
+					<img src="images/user.png" width="48" height="48" alt="User" />
+				</div>
+				<div class="info-container">
+					<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<p><span th:text="${session.nhanviendn.HoTen}"></span></p>
+					</div>
+				</div>
+			</div>
+			<!-- #User Info -->
+			<!-- Menu -->
+			<div class="menu">
+				<ul class="list">
+					<li class="header">CHUYÊN MỤC</li>
+					<li class="active">
+						<a href="index ">
+							<i class="material-icons">home</i>
+							<span>TRANG CHỦ</span>
+						</a>
+					</li>
+					<li class="active"><a href="logout "> <i class="material-icons">text_fields</i><span>ĐĂNG
+								XUẤT</span>
+						</a></li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>LOẠI SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_loai">Thêm loại</a></li>
+							<li><a href="loai">Danh sách loại</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_sanpham">Thêm sản phẩm</a></li>
+							<li><a href="sanpham">Danh sách sản phẩm</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>ĐƠN HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="donhang">Danh sách đơn hàng</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>NHÂN VIÊN</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_nhanvien">Thêm Nhân viên</a></li>
+							<li><a href="ds_nhanvien">Danh sách nhân viên</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>KHÁCH HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_khachhang">Thêm khách hàng</a></li>
+							<li><a href="ds_khachhang">Danh sách khách hàng</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="menu-toggle">
+							<i class="material-icons">pie_chart</i>
+							<span>Charts</span>
+						</a>
+						<ul class="ml-menu">
+							<li>
+								<a href="pages/charts/morris.html">Morris</a>
+							</li>
+							<li>
+								<a href="pages/charts/flot.html">Flot</a>
+							</li>
+							<li>
+								<a href="pages/charts/chartjs.html">ChartJS</a>
+							</li>
+							<li>
+								<a href="pages/charts/sparkline.html">Sparkline</a>
+							</li>
+							<li>
+								<a href="pages/charts/jquery-knob.html">Jquery Knob</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- #Menu -->
+
+		</aside>
+		<!-- #END# Left Sidebar -->
+
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row clearfix">
+				<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 center-block" style="float:none">
+					<div class="card">
+						<div class="header">
+							<h2 style="color: #fc8213;">
+								THÊM THÔNG TIN KHÁCH HÀNG
+							</h2>
+						</div>
+
+						<div class="body">
+							<form th:action="@{/admin/khachhang}" method="post">
+
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="HoTen"> TÊN KHÁCH HÀNG </label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="text"  name="HoTen" class="form-control"
+													placeholder="Nhập họ tên khách hàng" maxlength="50" minlength="1"
+													required>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>SĐT</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="number" id="SDT" name="SDT" class="form-control"
+													placeholder="Nhập SDT của khách hàng" required min="10" max="11">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="GioiTinh">GIỚI TÍNH</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="radio" id="nam" name="GioiTinh" value="nam">
+												<label for="nam">Nam</label>
+												<input type="radio" id="nu" name="GioiTinh" value="nu">
+												<label for="nu">Nữ</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="NgaySinh"> NGÀY SINH</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="date" class="form-control" id="NgaySinh" name="NgaySinh"
+													required>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>Địa chỉ</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="text" id="DiaChi" name="DiaChi" class="form-control"
+													placeholder="Nhập địa chỉ của khách hàng" required> </div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>Email</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="email" name="Email" class="form-control"
+													placeholder="Nhập email của khách hàng" required> </div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+										<button type="submit" class="btn btn-primary m-t-15 waves-effect">THÊM</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<!-- Jquery Core Js -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core Js -->
+	<script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- Select Plugin Js -->
+	<script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+	<!-- Slimscroll Plugin Js -->
+	<script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script src="plugins/node-waves/waves.js"></script>
+
+	<!-- Jquery DataTable Plugin Js -->
+	<script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+	<script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+	<!-- Custom Js -->
+	<script src="js/admin.js"></script>
+	<script src="js/pages/tables/jquery-datatable.js"></script>
+
+	<!-- Demo Js -->
+	<script src="js/demo.js"></script>
+</body>
+
+</html>

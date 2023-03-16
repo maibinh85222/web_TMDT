@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>Quản Trị</title>
+	<!-- Favicon-->
+	<link rel="icon" href="/admin/admin/favicon.ico" type="image/x-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+		type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+	<!-- Bootstrap Core Css -->
+	<link href="/admin/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Waves Effect Css -->
+	<link href="/admin/plugins/node-waves/waves.css" rel="stylesheet" />
+
+	<!-- Animation Css -->
+	<link href="/admin/plugins/animate-css/animate.css" rel="stylesheet" />
+
+	<!-- JQuery DataTable Css -->
+	<link href="/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	<!-- Custom Css -->
+	<link href="/admin/css/style.css" rel="stylesheet">
+
+	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+	<link href="/admin/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+	<!-- Top Bar -->
+	<nav class="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="javascript:void(0);"
+					class="bars"></a> <a class="navbar-brand" href="/admin/index">Quản Trị</a>
+			</div>
+		</div>
+	</nav>
+	<!-- #Top Bar -->
+	<section>
+		<!-- Left Sidebar -->
+		<aside id="leftsidebar" class="sidebar">
+			<!-- User Info -->
+			<div class="user-info">
+				<div class="image">
+					<img src="/admin/images/user.png" width="48" height="48" alt="User" />
+				</div>
+				<div class="info-container">
+					<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<p><span th:text="${session.nhanviendn.HoTen}"></span></p>
+					</div>
+				</div>
+			</div>
+			<!-- #User Info -->
+			<!-- Menu -->
+			<div class="menu">
+				<ul class="list">
+					<li class="header">CHUYÊN MỤC</li>
+					<li class="active"><a href="/admin/index"> <i class="material-icons">home</i> <span>TRANG CHỦ</span>
+						</a></li>
+					<li class="active"><a href="/admin/logout"> <i class="material-icons">text_fields</i><span>ĐĂNG
+								XUẤT</span>
+						</a></li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>LOẠI SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="/admin/them_loai">Thêm loại</a></li>
+							<li><a href="/admin/loai">Danh sách loại</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="/admin/them_sanpham">Thêm sản phẩm</a></li>
+							<li><a href="/admin/sanpham">Danh sách sản phẩm</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>ĐƠN HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="/admin/donhang">Danh sách đơn hàng</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>NHÂN VIÊN</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="/admin/them_nhanvien">Thêm Nhân viên</a></li>
+							<li><a href="/admin/ds_nhanvien">Danh sách nhân viên</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>KHÁCH HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="/admin/ds_khachhang">Danh sách khách hàng</a></li>
+						</ul>
+					</li>
+					<li class="active"><a href="/admin/baocao"> <i class="material-icons">pie_chart</i> <span>BÁO CÁO</span>
+						</a></li>
+					
+				</ul>
+			</div>
+			<!-- #Menu -->
+		</aside>
+		<!-- #END# Left Sidebar -->
+
+	</section>
+
+	<section class="content">
+		<div class="container-fluid" th:if="${IDSP}">
+			<div class="row clearfix">
+				<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 center-block" style="float: none">
+					<div class="card">
+						<div class="header">
+							<h2 style="color: #fc8213;">CẬP NHẬT SẢN PHẨM</h2>
+						</div>
+						<div class="body">
+							<form class="form-horizontal" th:action="@{/admin/editsanpham/{IDSP}(IDSP = ${IDSP})}"
+								method="post" th:object=${sp}>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="idlt"> Mã SẢN PHẨM </label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="text" name="IDSP" th:value="*{IDSP}" readonly="true" />
+												</td>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="ten"> TÊN SẢN PHẨM </label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="text" name="TenSP" th:value="*{TenSP}" required />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for=""> GIÁ </label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line">
+												<input type="number" name="Gia" th:value="*{Gia}" required
+													pattern="[1-9]{1}[0-9]{4-8}" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="idtl"> GIÁ KHUYẾN MÃI </label>
+									</div>
+									<div class="col-sm-9">
+										<input type="number" name="GiaKM" th:value="*{GiaKM}" required
+											pattern="[1-9]{1}[0-9]{4-8}" />
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label for="thutu">LOẠI SẢN PHẨM</label>
+									</div>
+									<div class="col-sm-9">
+										<select name="IDLoai" th:field="*{IDLoai}"
+											style="padding: 10px 10px; width: 280px; margin-bottom: 20px;">
+											<option th:value="*{IDLoai}" selected></option>
+											<option th:each="l : ${listl}" th:value="${l.IDLoai}"
+												th:label="${l.TenLoai}">Chọn
+												Loại</option>
+										</select>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>Bảo Hành</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="text" name="BaoHanh" th:value="*{BaoHanh}" required />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>MÔ TẢ</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="text" name="MoTa" th:value="*{MoTa}" required />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>SỐ LƯỢNG</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="number" name="SL" th:value="*{SL}" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-sm-3 form-control-label">
+										<label>HÌNH ẢNH</label>
+									</div>
+									<div class="col-sm-9">
+										<div class="form-group">
+											<div class="form-line abc">
+												<input type="file" name="URLHinh" th:value="*{URLHinh}" required />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row clearfix">
+									<div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+										<button type="submit" class="btn btn-primary m-t-15 waves-effect"
+											onclick="return confirm('Bạn chắc chắn muốn thay đổi thông tin sản phẩm ?')">CẬP
+											NHẬT</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- Jquery Core Js -->
+	<script src="/admin/plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core Js -->
+	<script src="/admin/plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- Select Plugin Js -->
+	<script src="/admin/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+	<!-- Slimscroll Plugin Js -->
+	<script src="/admin/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script src="/admin/plugins/node-waves/waves.js"></script>
+	<!-- Custom Js -->
+	<script src="/admin/js/admin.js"></script>
+	<script src="/admin/js/pages/tables/jquery-datatable.js"></script>
+
+	<!-- Demo Js -->
+	<script src="/admin/js/demo.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <title>không tìm thấy trang</title>
+  <meta name="author" content="Surjith S M" />
+
+  <!-- SEO -->
+  <meta name="description" content="Tomato is a Responsive HTML5 Template for Restaurants and food related services." />
+  <meta name="keywords" content="tomato, responsive, html5, restaurant, template, food, reservation" />
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="img/favicon.ico" />
+
+  <!-- Responsive Tag -->
+  <meta name="viewport" content="width=device-width" />
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="css/plugin.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <div class="body">
+    <div class="main-wrapper">
+      <!-- Navigation-->
+      <nav class="navbar navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./trangchu">
+              <h1>TheGioiBEp</h1>
+            </a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="./trangchu" class="dropdown-toggle" role="button" aria-haspopup="true"
+                  aria-expanded="false">Trang Chủ</a>
+              </li>
+              <li>
+                <a href="sanpham" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Sản
+                  Phẩm</a>
+              </li>
+              <li class="dropdown">
+                <a href="./giohang" class="css-pointer dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart fsc pull-left"></i>
+                  <div th:if="${session.login == null}" <span class="cart-number">0</span>
+                  </div>
+                  <div th:if="${session.login != null}" <span class="cart-number" th:text="${session.sogh}"></span>
+                  </div>
+                  <span class="caret"></span>
+                  <div class="cart-content dropdown-menu">
+                    <div class="cart-title">
+                      <h4>Giỏ hàng</h4>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown" th:if="${session.login == null}">
+                <a href="/dangnhap" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Đăng
+                  nhập</a>
+              </li>
+              <li class="dropdown" th:if="${session.login}">
+                <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false"><i
+                    class="fa fa-user fsc pull-left"></i><span style="color: #fc8213"
+                    th:text="${session.login.Username}"></span> <span class="caret"></span></a>
+                <div class="cart-content dropdown-menu">
+                  <div class="cart-items">
+                    <div class="cart-item clearfix">
+                      <div class="cart-item-desc">
+                        <a href="thongtinkhachhang">Tài khoản của tôi</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart-action">
+                    <div class="cart-item clearfix">
+                      <div class="cart-item-desc">
+                        <a href="/dangxuat">Đăng xuất</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!--/.navbar-collapse -->
+        </div>
+      </nav>
+
+      <!-- Page Header -->
+      <section class="page_header vertical-padding"></section>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="giant-space">
+              <h2 class="text-giant">404</h2>
+              <p class="wow fadeInUp">
+                Sorry. The page you are looking for is not found
+              </p>
+              <p class="top-space-lg">
+                <a href="./trangchu" class="btn btn-default btn-lg">Quay về trang chủ</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer-->
+      <section class="footer">
+        <div class="container">
+          <div class="row">
+    		<div class="col-md-8 col-sm-12">
+							<!--  --><h1>Về chúng tôi</h1>
+							<p>
+								CÔNG TY TNHH TheGioiBep
+								.<br>
+								Giấy phép kinh doanh: 0313728397
+								.<br>
+							Sở kế hoạch và đầu tư thành phố Hồ Chí Minh
+							</p>
+						</div>
+            <div class="col-md-4 col-sm-6">
+              <h1>Liên hệ</h1>
+              <div class="footer-social-icons">
+                <a href="http://www.facebook.com">
+                  <i class="fa fa-facebook-square"></i>
+                </a>
+                <a href="http://www.twitter.com">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="http://plus.google.com">
+                  <i class="fa fa-google"></i>
+                </a>
+                <a href="http://www.youtube.com">
+                  <i class="fa fa-youtube-play"></i>
+                </a>
+                <a href="http://www.vimeo.com">
+                  <i class="fa fa-vimeo"></i>
+                </a>
+                <a href="http://www.pinterest.com">
+                  <i class="fa fa-pinterest-p"></i>
+                </a>
+                <a href="http://www.linkedin.com">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </div>
+              <div class="footer-address">
+                <p>
+                  <i class="fa fa-map-marker"></i>97 Man Thiện, P. Hiệp Phú,
+                  Quận 9
+                </p>
+                <p>
+                  <i class="fa fa-phone"></i>Phone: 0904 556 055 – 0936 266
+                  911
+                </p>
+                <p><i class="fa fa-envelope-o"></i>TheGioiBEp@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- Footer - Copyright -->
+  </section>
+  </div>
+  </div>
+
+  <!-- Javascript -->
+  <script src="js/vendor/jquery-1.11.2.min.js"></script>
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/vendor/jquery.flexslider-min.js"></script>
+  <script src="js/vendor/spectragram.js"></script>
+  <script src="js/vendor/owl.carousel.min.js"></script>
+  <script src="js/vendor/velocity.min.js"></script>
+  <script src="js/vendor/velocity.ui.min.js"></script>
+  <script src="js/vendor/bootstrap-datepicker.min.js"></script>
+  <script src="js/vendor/bootstrap-clockpicker.min.js"></script>
+  <script src="js/vendor/jquery.magnific-popup.min.js"></script>
+  <script src="js/vendor/isotope.pkgd.min.js"></script>
+  <script src="js/vendor/slick.min.js"></script>
+  <script src="js/vendor/wow.min.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/vendor/vegas/vegas.min.js"></script>
+  <script src="js/vendor/jquery.mb.YTPlayer.js"></script>
+  <script src="js/vendor/jquery.stellar.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/vendor/mc/jquery.ketchup.all.min.js"></script>
+  <script src="js/vendor/mc/main.js"></script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/607bb0a3f7ce1827093b7736/1f3hik00n';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>

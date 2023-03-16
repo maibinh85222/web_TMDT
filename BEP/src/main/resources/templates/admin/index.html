@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Jquery Core Js -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+	<title>QUẢN TRỊ | THIẾT BỊ BẾP</title>
+	<!-- Favicon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+		type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+	<!-- Bootstrap Core Css -->
+	<link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Waves Effect Css -->
+	<link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+	<!-- Animation Css -->
+	<link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+	<!-- Morris Chart Css-->
+	<link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+
+	<!-- Custom Css -->
+	<link href="css/style.css" rel="stylesheet">
+
+	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+	<link href="css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+	<!-- Overlay For Sidebars -->
+	<div class="overlay"></div>
+	<!-- #END# Overlay For Sidebars -->
+	<!-- Search Bar -->
+	<div class="search-bar">
+		<div class="search-icon">
+			<i class="material-icons">search</i>
+		</div>
+		<input type="text" placeholder="START TYPING...">
+		<div class="close-search">
+			<i class="material-icons">close</i>
+		</div>
+	</div>
+	<!-- #END# Search Bar -->
+	<!-- Top Bar -->
+	<nav class="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="javascript:void(0);"
+					class="bars"></a> <a class="navbar-brand" href="/admin/index">Quản Trị</a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- Call Search -->
+					<li><a href="javascript:void(0);" class="js-search" data-close="true"><i
+								class="material-icons"></i></a></li>
+					<!-- #END# Call Search -->
+					<li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+								class="material-icons"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- #Top Bar -->
+	<section>
+		<!-- Left Sidebar -->
+		<aside id="leftsidebar" class="sidebar">
+			<!-- User Info -->
+			<div class="user-info">
+				<div class="image">
+					<img src="images/user.png" width="70" height="70" alt="User" />
+				</div>
+				<div class="info-container">
+					<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<p th:if="${session.user}"><span th:text="${session.nhanviendn.HoTen}"></span></p>
+					</div>
+				</div>
+			</div>
+			<!-- #User Info -->
+			<!-- Menu -->
+			<div class="menu">
+				<ul class="list">
+					<li class="header">CHUYÊN MỤC</li>
+					<li class="active"><a href="index"> <i class="material-icons">home</i> <span>TRANG CHỦ</span>
+						</a></li>
+					<li class="active"><a href="logout"> <i class="material-icons">text_fields</i><span>ĐĂNG
+								XUẤT</span>
+						</a></li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>LOẠI SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_loai">Thêm loại</a></li>
+							<li><a href="loai">Danh sách loại</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_sanpham">Thêm sản phẩm</a></li>
+							<li><a href="sanpham">Danh sách sản phẩm</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>ĐƠN HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="donhang">Danh sách đơn hàng</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>NHÂN VIÊN</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_nhanvien">Thêm Nhân viên</a></li>
+							<li><a href="ds_nhanvien">Danh sách nhân viên</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>KHÁCH HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="ds_khachhang">Danh sách khách hàng</a></li>
+						</ul>
+					</li>
+					<li class="active"><a href="baocao"> <i class="material-icons">pie_chart</i> <span>BÁO CÁO</span>
+						</a></li>
+					
+				</ul>
+			</div>
+			<!-- #Menu -->
+		</aside>
+		<!-- #END# Left Sidebar -->
+	</section>
+<input id="doanhso" type="hidden" style="color: RED" th:value="${doanhso}"></input>
+<!-- Bước 1: khai báo thư viện Chart.js và BootrapCDN --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Bước 2: Tạo một thẻ <Div> với <canvas> bên trong để hứng biểu đồ --> 
+<div class="container">
+    <canvas id="myChart" style="display: block;height: 500px;width: 1130px;margin-left: 165px;"></canvas>
+  </div>
+
+<!-- Bước 3: Tùy biến biểu đồ và thay đổi số liệu --> 
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato00';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    
+    
+	var doanhso= document.getElementById("doanhso").value;
+	
+	var array= doanhso.replace("[","").replace("]","").split(",")
+
+    let massPopChart = new Chart(myChart, {
+      type:'pie',
+      data:{
+        labels:['Tháng 01', '02', '03', '04', '05', '06','07','08','09','10','11','12',],
+        datasets:[{
+          label:'Doanh thu ',
+          data: array,
+          fill: false,
+          backgroundColor:[
+              'rgba(255,0,0)',
+              'rgba(255,128,0)',
+              'rgba(255,255,0)',
+              'rgba(128,255,0)',
+              'rgba(0,255,0)',
+              'rgba(0,255,128)',
+              'rgba(0,255,255)',
+              'rgba(255,128,0)',
+              'rgba(255,255,0)',
+              'rgba(0,255,0)',
+              'rgba(0,255,128)'
+            ],
+          borderColor: 'rgb(0,0,0)',
+          tension: 0.1
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:'DOANH SỐ BÁN HÀNG THEO THÁNG',
+          fontSize:25,
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:100,
+            right:100,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+	
+</script>
+
+	<!-- Bootstrap Core Js -->
+	<script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- Select Plugin Js -->
+	<script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+	<!-- Slimscroll Plugin Js -->
+	<script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script src="plugins/node-waves/waves.js"></script>
+	<!-- Custom Js -->
+	<script src="js/admin.js"></script>
+	<script src="js/pages/index.js"></script>
+
+	<!-- Demo Js -->
+	<script src="js/demo.js"></script>
+</body>
+
+</html>

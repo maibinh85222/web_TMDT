@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>QUẢN TRỊ - THIẾT BỊ BẾP</title>
+	<!-- Favicon-->
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+		type="text/css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+	<!-- Bootstrap Core Css -->
+	<link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Waves Effect Css -->
+	<link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+	<!-- Animation Css -->
+	<link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+	<!-- JQuery DataTable Css -->
+	<link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	<!-- Custom Css -->
+	<link href="css/style.css" rel="stylesheet">
+
+	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+	<link href="css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+	<!-- Top Bar -->
+	<nav class="navbar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar-collapse" aria-expanded="false"></a>
+				<a href="javascript:void(0);" class="bars"></a>
+				<a class="navbar-brand" href="index">QUẢN TRỊ - THIẾT BỊ BẾP</a>
+			</div>
+		</div>
+	</nav>
+	<!-- #Top Bar -->
+	<section>
+		<!-- Left Sidebar -->
+		<aside id="leftsidebar" class="sidebar">
+			<!-- User Info -->
+			<div class="user-info">
+				<div class="image">
+					<img src="images/user.png" width="48" height="48" alt="User" />
+				</div>
+				<div class="info-container">
+					<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<p><span th:text="${session.nhanviendn.HoTen}"></span></p>
+					</div>
+				</div>
+			</div>
+			<!-- #User Info -->
+			<!-- Menu -->
+			<div class="menu">
+				<ul class="list">
+					<li class="header">CHUYÊN MỤC</li>
+					<li class="active">
+						<a href="/index ">
+							<i class="material-icons">home</i>
+							<span>TRANG CHỦ</span>
+						</a>
+					</li>
+					<li class="active"><a href="logout "> <i class="material-icons">text_fields</i><span>ĐĂNG
+								XUẤT</span>
+						</a></li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>LOẠI SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_loai">Thêm loại</a></li>
+							<li><a href="loai">Danh sách loại</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>SẢN PHẨM</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_sanpham">Thêm sản phẩm</a></li>
+							<li><a href="sanpham">Danh sách sản phẩm</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>ĐƠN HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="donhang">Danh sách đơn hàng</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>NHÂN VIÊN</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="them_nhanvien">Thêm Nhân viên</a></li>
+							<li><a href="ds_nhanvien">Danh sách nhân viên</a></li>
+						</ul>
+					</li>
+					<li><a href="javascript:void(0);" class="menu-toggle"> <i class="material-icons">view_list</i>
+							<span>KHÁCH HÀNG</span>
+						</a>
+						<ul class="ml-menu">
+							<li><a href="dangkikh">Thêm khách hàng</a></li>
+							<li><a href="ds_khachhang">Danh sách khách hàng</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="menu-toggle">
+							<i class="material-icons">pie_chart</i>
+							<span>Charts</span>
+						</a>
+						<ul class="ml-menu">
+							<li>
+								<a href="pages/charts/morris.html">Morris</a>
+							</li>
+							<li>
+								<a href="pages/charts/flot.html">Flot</a>
+							</li>
+							<li>
+								<a href="pages/charts/chartjs.html">ChartJS</a>
+							</li>
+							<li>
+								<a href="pages/charts/sparkline.html">Sparkline</a>
+							</li>
+							<li>
+								<a href="pages/charts/jquery-knob.html">Jquery Knob</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- #Menu -->
+
+		</aside>
+		<!-- #END# Left Sidebar -->
+
+	</section>
+
+	<section class="content">
+		<div class="container-fluid">
+			<!-- show TL -->
+			<div class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header">
+							<h2>
+								DANH SÁCH ĐƠN HÀNG
+							</h2>
+						</div>
+						<div class="body">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-striped table-hover js-basic-example dataTable">
+									<thead>
+										<tr>
+											<th>MÃ ĐƠN HÀNG</th>
+											<th>KHÁCH HÀNG</th>
+											<th>TỔNG TIỀN</th>
+											<th>NGÀY GIAO DỊCH</th>
+											<th>TÊN NGƯỜI NHẬN</th>
+											<th>ĐỊA CHỈ</th>
+											<th>PHƯƠNG THỨC TT</th>
+											<th>TRẠNG THÁI</th>
+											<th>GHI CHÚ</th>
+											<th>NHÂN VIÊN XỬ LÝ</th>
+											<th>XEM CHI TIẾT</th>
+											<th>CẬP NHẬT</th>
+										</tr>
+									</thead>
+									</tr>
+									<tbody>
+										<tr th:each="listdh : ${listdh}">
+											<td th:utext="${listdh.IDDH}"></td>
+											<td th:utext="${listdh.HoTenKH}"></td>
+											<td th:utext="${listdh.TongTien}"></td>
+											<td th:utext="${listdh.NgayGiaoDich}"></td>
+											<td th:utext="${listdh.HoTenNguoiNhan}"></td>
+											<td th:utext="${listdh.DiaChi}"></td>
+											<td th:if="${listdh.PhuongThucTT == 0}">Tiền mặt</td>
+											<td th:if="${listdh.PhuongThucTT == 1}">Online</td>
+											<td th:if="${listdh.TrangThai == 0}">
+												<span class="btn bg-yellow waves-effect">Chờ xác nhận</span></td>
+											<td th:if="${listdh.TrangThai == 1}">
+												<span class="btn bg-orange waves-effect">Đã xác nhận</span></td>
+											<td th:if="${listdh.TrangThai == 2}">
+												<span class="btn bg-yellow waves-effect">Đang Giao</span></td>
+											<td th:if="${listdh.TrangThai == 3}">
+												<span class="btn bg-green waves-effect">Thành công</span></td>
+											<td th:if="${listdh.TrangThai == 4}">
+												<span class="btn bg-red waves-effect">HỦY</span>
+											</td>
+											<td th:utext="${listdh.GhiChu}"></td>
+											<td th:utext="${listdh.HoTenNV}"></td>
+											<td><a th:href="@{/admin/chitietdh(IDDH=${listdh.IDDH})}"
+													class="btn bg-black waves-effect" >Chi tiết</a></td>
+											<td>
+												<span th:if="${listdh.TrangThai < 3}">
+													<a th:href="@{/admin/editdh/{IDDH}(IDDH=${listdh.IDDH})}"
+														class="btn bg-blue waves-effect">Cập nhật</a>
+												</span>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+								<script>  
+  function chitiet(){ document.getElementById("chitietdh").scrollIntoView();
+  }  
+</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="chitietdh" class="row clearfix">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="card">
+						<div class="header">
+							<h2 style="color: #fc8213;">
+								CHI TIẾT ĐƠN HÀNG
+							</h2>
+						</div>
+						<div class="body">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-striped table-hover js-basic-example dataTable">
+									<thead>
+										<tr>
+											<th>MÃ ĐƠN HÀNG</th>
+											<th>TÊN SẢN PHẨM</th>
+											<th>SỐ LƯỢNG</th>
+											<th>GIÁ</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="listct : ${listct}">
+											<td th:text="${listct.IDDH}"></td>
+											<td th:text="${listct.TenSP}"></td>
+											<td th:text="${listct.SL}"></td>
+											<td th:text="${listct.Gia}"></td>
+
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- #END# show TL 
+<tr th:each="listct : ${listct}">
+<td th:utext="${listct.IDSP}"></td>
+<td th:utext="${listct.SL}"></td>
+</tr>
+<p>Name: <span th:text="${session.user.firstName}"></span>.</p>
+-->
+		</div>
+	</section>
+	<!--
+		
+<script>
+function myFunction() {
+	var s= "${message}";
+  alert(s);
+}
+</script>-->
+	<!-- Jquery Core Js -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core Js -->
+	<script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- Select Plugin Js -->
+	<script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+	<!-- Slimscroll Plugin Js -->
+	<script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script src="plugins/node-waves/waves.js"></script>
+
+	<!-- Jquery DataTable Plugin Js -->
+	<script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+	<script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+	<script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+	<!-- Custom Js -->
+	<script src="js/admin.js"></script>
+	<script src="js/pages/tables/jquery-datatable.js"></script>
+
+	<!-- Demo Js -->
+	<script src="js/demo.js"></script>
+</body>
+
+</html>
